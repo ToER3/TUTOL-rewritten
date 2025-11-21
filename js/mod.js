@@ -1,25 +1,24 @@
 let modInfo = {
-	name: "The ??? Tree",
-	author: "nobody",
-	pointsName: "points",
+	name: "The Upgrade Tree of Life: Rewritten",
+	author: "Euler number squared",
+	pointsName: "Leaves",
 	modFiles: ["layers.js", "tree.js"],
 
 	discordName: "",
 	discordLink: "",
-	initialStartPoints: new Decimal (10), // Used for hard resets and new players
+	initialStartPoints: new Decimal (1), // Used for hard resets and new players
 	offlineLimit: 1,  // In hours
 }
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0",
-	name: "Literally nothing",
+	num: "μ-∞",
+	name: "The 1st beta",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.0</h3><br>
-		- Added things.<br>
-		- Added stuff.`
+	<h3>μ-∞</h3><br>
+		- First release<br>`
 
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
 
@@ -40,8 +39,19 @@ function canGenPoints(){
 function getPointGen() {
 	if(!canGenPoints())
 		return new Decimal(0)
+	
 
 	let gain = new Decimal(1)
+	if (hasUpgrade("L",11)) {gain = gain.times(2)}
+	if (hasUpgrade("L",21)) {gain = gain.times(3)}
+	if (hasUpgrade("L",22)) {gain = gain.times(5)}
+	if (hasUpgrade("L",31)) gain = gain.times(upgradeEffect("L",31))
+	if (hasUpgrade("L",32)) {gain = gain.times(1.5)}
+	if (hasUpgrade("L",33)) gain = gain.times(upgradeEffect("L",33))
+	if (hasUpgrade("L",34)) {gain = gain.times(10)}
+	if (hasUpgrade("L",41)) {gain = gain.times(100)}
+
+
 	return gain
 }
 
