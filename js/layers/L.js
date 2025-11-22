@@ -7,14 +7,13 @@ addLayer("L", {
     color: "#4BDC13",                       // The color for this layer, which affects many elements.
                 // The name of this layer's main prestige resource.
     row: 0,                                 // The row this layer is on (0 is the first row).
-    baseResource: "Leaves",                 // The name of the resource your prestige gain is based on.
-    baseAmount() { return player.points},  // A function to return the current amount of baseResource.
+      // A function to return the current amount of baseResource.
     type: "none",                         // Determines the formula used for calculating prestige currency.
     layerShown() { return true },          // Returns a bool for if this layer's node should be visible in the tree.
     infoboxes: {
     lore: {
         title: "Welcome",
-        body() { return "Welcome to The Upgrade Tree of Life: Rewritten, or TUTOL:R. This will work a bit different from the real TUTOL, or even the old TUTOL web if you played <br> For now just grind until you gain 1e6 leaves to gain seeds!" },
+        body() { return "You wake up in a wasteland, you wonder where you are? How you ended up here? It seems like you forgot any past memories. There is a tree infront of you, and this world has a lack of life, so its time to give it some life <br> Welcome to TUTOL:R! A rework of my old TUTOl web port, reach 1e6 leaves for the next layer!" },
         },
     },
     upgrades: {
@@ -97,7 +96,7 @@ addLayer("L", {
         41: {
             title: "L8: Stacking leaves!",
             description: "Boost leaves by x100",
-            cost: new Decimal(50000),
+            cost: new Decimal(20000),
             currencyDisplayName: "Leaves",
             currencyInternalName: "points",
             style: {'margin-top':'50px'},
@@ -105,8 +104,9 @@ addLayer("L", {
             unlocked() { return hasUpgrade("L", 31); },
         },
         51: {
-            title: "L9: evil dev spladder",
-            description: "placeholder",
+            title: "L9: Massive jump in costs",
+            description: "Leaves and seeds boosted by x2",
+            cost: new Decimal(1e9),
             currencyDisplayName: "Leaves",
             currencyInternalName: "points",
             style: {'margin-top':'20px'},
@@ -114,54 +114,34 @@ addLayer("L", {
             unlocked() { return hasUpgrade("L", 41); },
         },
         52: {
-            title: "placeholder",
-            description: "placeholder",
+            title: "L10: Nevermind",
+            description: "x3 leaves",
+            cost: new Decimal(2e9),
             currencyDisplayName: "Leaves",
             currencyInternalName: "points",
             style: {'margin-top':'20px','margin-left':'100px'},
             branches: [41],
             unlocked() { return hasUpgrade("L", 41); },
         },
+        61: {
+            title: "L11: More and more",
+            description: "x3 seeds",
+            cost: new Decimal(2e10),
+            currencyDisplayName: "Leaves",
+            currencyInternalName: "points",
+            style: {'margin-top':'50px','margin-left':'225px'},
+            branches: [52],
+            unlocked() { return hasUpgrade("L", 41); },
+        },
+    },
+    tabFormat: {
+        "Upgrades": {
+            content: ["upgrades"]
+        },
+        "Help": {
+            content: [ ["infobox", "lore"]],
+        }
+
     }
 })
 
-addLayer("S", {
-    name: "prestige", // This is optional, only used in a few places, If absent it just uses the layer id.
-    symbol: "S", // This appears on the layer's node. Default is the id with the first letter capitalized
-    position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
-    startData() { return {
-        unlocked: true,
-		points: new Decimal(0),
-    }},
-    color: "#a34101",
-    requires: new Decimal(1e6), // Can be a function that takes requirement increases into account
-    resource: "Seeds", // Name of prestige currency
-    baseResource: "Leaves", // Name of resource prestige is based on
-    baseAmount() {return player.points}, // Get the current amount of baseResource
-    type: "normal",
-    prestigeButtonText() {
-        return `Reset for ${format(getResetGain(this.layer, useType = "normal"))} seeds`
-     },
-    exponent: 0.25,
-    gainMult() { // Calculate the multiplier for main currency from bonuses
-        mult = new Decimal(1)
-        return mult
-    },
-    gainExp() { // Calculate the exponent on main currency from bonuses
-        return new Decimal(1)
-    },
-    row: 1, // Row the layer is in on the tree (0 is the first row)
-    hotkeys: [
-        {key: "s", description: "s: Reset for seeds", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
-    ],
-    layerShown(){return true},
-    upgrades: {
-        11: {
-            title: "S1: Why are there challenges to seeds?",
-            description: "Boost leaves by x10 and unlock seed challenges",
-            cost: new Decimal(10),
-            currencyDisplayName: "Leaves",
-            currencyInternalName: "points",
-        },
-    }
-})

@@ -2,7 +2,7 @@ let modInfo = {
 	name: "The Upgrade Tree of Life: Rewritten",
 	author: "Euler number squared",
 	pointsName: "Leaves",
-	modFiles: ["layers.js", "tree.js"],
+	modFiles: ["layers/S.js", "layers/L.js", "tree.js"],
 
 	discordName: "",
 	discordLink: "",
@@ -12,15 +12,20 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "μ-∞",
-	name: "The 1st beta",
+	num: "μ1.0",
+	name: "The 1st beta update",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>μ-∞</h3><br>
+    <h2>μ1.0</h2><br>
+		- Seed upgrades added<br>
+		- Seed challenges added<br>
+		- More leaf upgrades added<br>
+		- Look at this nice tabs
+	<br><h3>μ-∞</h3><br>
 		- First release<br>`
 
-let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
+let winText = `you cheater you aren't meant to reach endgame now!`
 
 // If you add new functions anywhere inside of a layer, and those functions have an effect when called, add them here.
 // (The ones here are examples, all official functions are already taken care of)
@@ -50,6 +55,14 @@ function getPointGen() {
 	if (hasUpgrade("L",33)) gain = gain.times(upgradeEffect("L",33))
 	if (hasUpgrade("L",34)) {gain = gain.times(10)}
 	if (hasUpgrade("L",41)) {gain = gain.times(100)}
+	if (inChallenge("S", 11)) {gain = gain.pow(0.6).times(1/40)}
+	if (hasUpgrade("S", 11)) {gain = gain.times(10)}
+	if (hasUpgrade("L",51)) {gain = gain.times(2)}
+	if (hasUpgrade("L",52)) {gain = gain.times(3)}
+	if (hasUpgrade("S",21)) {gain = gain.times(2)}
+	if (hasUpgrade("S",22)) {gain = gain.times(50)}
+    if (challengeEffect("S",11).gt(1)) {gain = gain.times(challengeEffect("S",11))}
+	
 
 
 	return gain
