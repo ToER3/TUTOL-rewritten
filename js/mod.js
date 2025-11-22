@@ -61,7 +61,7 @@ function getPointGen() {
 	if (hasUpgrade("L",52)) {gain = gain.times(3)}
 	if (hasUpgrade("S",21)) {gain = gain.times(2)}
 	if (hasUpgrade("S",22)) {gain = gain.times(50)}
-    if (challengeEffect("S",11).gt(1)) {gain = gain.times(challengeEffect("S",11))}
+    if (maxedChallenge("S",11)) {gain = gain.times(challengeEffect("S",11))}
 	
 
 
