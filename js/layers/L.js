@@ -8,7 +8,7 @@ addLayer("L", {
                 // The name of this layer's main prestige resource.
     row: 0,                                 // The row this layer is on (0 is the first row).
       // A function to return the current amount of baseResource.
-    type: "none",                         // Determines the formula used for calculating prestige currency.
+                             // Determines the formula used for calculating prestige currency.
     layerShown() { return true },          // Returns a bool for if this layer's node should be visible in the tree.
     infoboxes: {
     lore: {
