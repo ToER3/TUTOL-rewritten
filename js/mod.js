@@ -17,11 +17,17 @@ let VERSION = {
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-    <h2>μ1.0</h2><br>
+    <h2>μ1.1</h2><br>
+		- Reworked some leaf upgrades
+		- Since the leaf upgrades are reworked, the 1st exposure test has a better debuff
+		- Took a long break sorry :>
+    <br>
+    <br><h3>μ1.0</h3><br>
 		- Seed upgrades added<br>
 		- Seed challenges added<br>
 		- More leaf upgrades added<br>
 		- Look at this nice tabs
+    <br>
 	<br><h3>μ-∞</h3><br>
 		- First release<br>`
 
@@ -49,19 +55,22 @@ function getPointGen() {
 	let gain = new Decimal(1)
 	if (hasUpgrade("L",11)) {gain = gain.times(2)}
 	if (hasUpgrade("L",21)) {gain = gain.times(3)}
-	if (hasUpgrade("L",22)) {gain = gain.times(5)}
-	if (hasUpgrade("L",31)) gain = gain.times(upgradeEffect("L",31))
-	if (hasUpgrade("L",32)) {gain = gain.times(1.5)}
-	if (hasUpgrade("L",33)) gain = gain.times(upgradeEffect("L",33))
-	if (hasUpgrade("L",34)) {gain = gain.times(10)}
-	if (hasUpgrade("L",41)) {gain = gain.times(100)}
-	if (inChallenge("S", 11)) {gain = gain.pow(0.6).times(1/40)}
+	if (hasUpgrade("L",22)) {gain = gain.times(upgradeEffect("L",22))}
+	if (hasUpgrade("L",31)) gain = gain.times(2.5)
+	if (hasUpgrade("L",32)) {gain = gain.times(3)}
+	if (hasUpgrade("L",33)) gain = gain.times(3.14)
+	if (hasUpgrade("L",34)) {gain = gain.times(1.75)}
+	if (hasUpgrade("L",41)) {gain = gain.times(upgradeEffect("L",41))}
+	if (inChallenge("S", 11)) {gain = gain.pow(0.3).times(1/70)}
 	if (hasUpgrade("S", 11)) {gain = gain.times(10)}
 	if (hasUpgrade("L",51)) {gain = gain.times(2)}
-	if (hasUpgrade("L",52)) {gain = gain.times(3)}
-	if (hasUpgrade("S",21)) {gain = gain.times(2)}
+	if (hasUpgrade("L",52)) {gain = gain.times(1.5)}
+	if (hasUpgrade("S",21)) {gain = gain.times(5)}
 	if (hasUpgrade("S",22)) {gain = gain.times(50)}
     if (maxedChallenge("S",11)) {gain = gain.times(challengeEffect("S",11))}
+	if (hasUpgrade("S",31)) {gain = gain.times(upgradeEffect("S",31))}
+	if (hasUpgrade("L",62)) {gain = gain.times(4)}
+	if (hasUpgrade("L",61)) {gain = gain.times(5)}
 	
 
 

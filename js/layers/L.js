@@ -19,16 +19,16 @@ addLayer("L", {
     upgrades: {
        
         11: {
-            title: "L1: Welcome!",
-            description: "Boost Leaf gain by 2x",
+            title: "L1: Grow I",
+            description: "2x leaves",
             cost: new Decimal(10),
             currencyDisplayName: "Leaves",
             currencyInternalName: "points",
         },
         21: {
-            title: "L2: More leaves",
+            title: "L2: Grow II",
             description: "x3 leaves",
-            cost: new Decimal(25),
+            cost: new Decimal(35),
             currencyDisplayName: "Leaves",
             currencyInternalName: "points",
             style: {'margin-top':'20px'},
@@ -36,9 +36,13 @@ addLayer("L", {
             unlocked() { return hasUpgrade("L", 11); },
         },
         22: {
-            title: "L3: Bunch of leaves",
-            description: "x5 leaves",
-            cost: new Decimal(100),
+            title: "L3: Develop I",
+            description: "Leaves boost themselves at a reduced rate",
+            cost: new Decimal(150),
+            effect() {
+            return player.points.div(1000).pow(0.1).add(1)
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
             currencyDisplayName: "Leaves",
             currencyInternalName: "points",
             style: {'margin-top':'20px','margin-left':'20px'},
@@ -46,13 +50,9 @@ addLayer("L", {
             unlocked() { return hasUpgrade("L", 11); },
         },
         31: {
-            title: "L4: Self-synergy",
-            description: "Leaves boost themselves",
+            title: "L4: Grow III",
+            description: "x2.5 leaves",
             cost: new Decimal(500),
-                effect() {
-            return player.points.add(1).pow(0.1)
-            },
-            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
             currencyDisplayName: "Leaves",
             currencyInternalName: "points",
             style: {'margin-top':'20px','margin-left':'20px'},
@@ -60,9 +60,9 @@ addLayer("L", {
             unlocked() { return hasUpgrade("L", 21); },
         },
         32: {
-            title: "L5: Why is there no tree age?",
-            description: "Dont ask me! Boost Leaf gain by 1.5x",
-            cost: new Decimal(1000),
+            title: "L5: Grow IV",
+            description: "x3 leaves",
+            cost: new Decimal(1490),
             currencyDisplayName: "Leaves",
             currencyInternalName: "points",
             style: {'margin-top':'20px','margin-left':'20px'},
@@ -70,13 +70,13 @@ addLayer("L", {
             unlocked() { return hasUpgrade("L", 21); },
         },
         33: {
-            title: "L6: Leaf upgrade-synergy",
-            description: "L3's effect is squared",
+            title: "L6: Grow V",
+            description: "x3.14 leaves",
             effect() {
             return player.points.add(1).pow(0.1)
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
-            cost: new Decimal(3000),
+            cost: new Decimal(5000),
             currencyDisplayName: "Leaves",
             currencyInternalName: "points",
             style: {'margin-top':'20px','margin-left':'20px'},
@@ -84,9 +84,9 @@ addLayer("L", {
             unlocked() { return hasUpgrade("L", 21); },
         },
         34: {
-            title: "L7: Change of pace",
-            description: "Boost leaves by x10",
-            cost: new Decimal(10000),
+            title: "L7: Grow VI",
+            description: "x1.75 leaves",
+            cost: new Decimal(7500),
             currencyDisplayName: "Leaves",
             currencyInternalName: "points",
             style: {'margin-top':'20px','margin-left':'20px'},
@@ -94,9 +94,13 @@ addLayer("L", {
             unlocked() { return hasUpgrade("L", 21); },
         },
         41: {
-            title: "L8: Stacking leaves!",
-            description: "Boost leaves by x100",
-            cost: new Decimal(20000),
+            title: "L8: Develop II",
+            description: "Leaves boost themselves by a big amount",
+             effect() {
+            return player.points.div(16).pow(0.1).add(10)
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+            cost: new Decimal(2.4e4),
             currencyDisplayName: "Leaves",
             currencyInternalName: "points",
             style: {'margin-top':'50px'},
@@ -104,9 +108,9 @@ addLayer("L", {
             unlocked() { return hasUpgrade("L", 31); },
         },
         51: {
-            title: "L9: Massive jump in costs",
-            description: "Leaves and seeds boosted by x2",
-            cost: new Decimal(1e9),
+            title: "L9: Grow power",
+            description: "x2 leaves",
+            cost: new Decimal(2e5),
             currencyDisplayName: "Leaves",
             currencyInternalName: "points",
             style: {'margin-top':'20px'},
@@ -114,9 +118,9 @@ addLayer("L", {
             unlocked() { return hasUpgrade("L", 41); },
         },
         52: {
-            title: "L10: Nevermind",
-            description: "x3 leaves",
-            cost: new Decimal(2e9),
+            title: "L10: Small boost",
+            description: "x1.5 leaves",
+            cost: new Decimal(6.5e5),
             currencyDisplayName: "Leaves",
             currencyInternalName: "points",
             style: {'margin-top':'20px','margin-left':'100px'},
@@ -124,14 +128,24 @@ addLayer("L", {
             unlocked() { return hasUpgrade("L", 41); },
         },
         61: {
-            title: "L11: More and more",
-            description: "x3 seeds",
-            cost: new Decimal(2e10),
+            title: "L11: Grow VII",
+            description: "x5 leaves",
+            cost: new Decimal(2.25e7),
             currencyDisplayName: "Leaves",
             currencyInternalName: "points",
             style: {'margin-top':'50px','margin-left':'225px'},
             branches: [52],
-            unlocked() { return hasUpgrade("L", 41); },
+            unlocked() { return hasUpgrade("L", 51); },
+        },
+        62: {
+            title: "L12: Grow VIII",
+            description: "x4 Leaves",
+            cost: new Decimal(1.75e8),
+            currencyDisplayName: "Leaves",
+            currencyInternalName: "points",
+            style: { 'margin-left':'-750px', 'margin-top':'50px'},
+            branches: [61],
+            unlocked() { return hasUpgrade("L", 61); },
         },
     },
     tabFormat: {

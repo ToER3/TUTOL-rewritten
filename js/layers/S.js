@@ -18,8 +18,6 @@ addLayer("S", {
     exponent: 0.25,
     gainMult() { // Calculate the multiplier for main currency from bonuses
         gain = new Decimal(1)
-        if(hasUpgrade("L",51)) gain = gain.times(2)
-        if (hasUpgrade("L",61)) {gain = gain.times(3)}
         return gain
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -39,12 +37,12 @@ addLayer("S", {
     challenges: {
     11: {
         name: "Uranium-238 Exposure",
-        challengeDescription: "Expose your tree to some Uranium-238 radiation, which powers your leaves by 0.6 (which is a debuff), and divides your leaf gain by 50",
+        challengeDescription: "Expose your tree to some Uranium-238 radiation, which powers your leaves by 0.3 (which is a debuff), and divides your leaf gain by 70",
         canComplete: function() {return player.points.gte(1e6)},
         goalDescription: "Gain 1e6 Leaves",
         rewardDescription: "Leaves are now boosted based on your seeds",
         rewardEffect() {
-            return player.S.points.add(1).pow(0.4)
+            return player.S.points.add(1).pow(0.3)
         },
         rewardDisplay() { return format(challengeEffect(this.layer, this.id))+"x"}, 
         style: {'width':'300px', 'height':'300px', color:'#000000ff', 'background-color':'#00ff62ff', 'border-radius':'50px', 'border':'4px solid #17c75aff', },
@@ -62,7 +60,7 @@ addLayer("S", {
         },
         21: {
             title: "S2: The radiation wont bite back later trust me",
-            description: "x2 leaves",
+            description: "x5 leaves",
             cost: new Decimal(25),
             
             style: {'margin-top':'20px'},
@@ -79,13 +77,25 @@ addLayer("S", {
             unlocked() { return hasUpgrade("S", 11); },
         },
         23: {
-            title: "S4: EVIL dev spladder",
-            description: "muhahahaha does nothing give me all your seeds",
+            title: "S4: More and more trees are grown",
+            description: "x5 leaves",
             cost: new Decimal(1000),
             
             style: {'margin-top':'20px', 'margin-left':'20px'},
             branches: [11],
             unlocked() { return hasUpgrade("S", 11); },
+        },
+        31: {
+            title: "S5: Trust me im not late",
+            description: "Leaves boost themselves",
+            cost: new Decimal(1000),
+            effect() {  
+                return player.points.log(10).pow(0.7) + 1
+            },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+            style: {'margin-top':'20px'},
+            branches: [21, 22, 23],
+            unlocked() { return hasUpgrade("S", 23); },
         },
         
     },
